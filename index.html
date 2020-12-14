@@ -61,12 +61,12 @@
     var socket = io();
     $('form').submit(function(e){
       e.preventDefault(); // prevents page reloading
-      socket.emit('chat message', $('#m').val());
+      socket.emit('chat message', $('#m').val(), username, color);
       $('#m').val('');
       return false;
     });
-    socket.on('chat message', function(msg){
-      let html = `<li><span style="color:${color}; font-weight: 700">${username}</span>: ${msg}</li>`;
+    socket.on('chat message', function(msg, user, col){
+      let html = `<li><span style="color:${col}; font-weight: 700">${user}</span>: ${msg}</li>`;
       $('#messages').append(html);
     });
   });
